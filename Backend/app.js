@@ -21,22 +21,25 @@ app.get('/tweets', (req, res) => {
 	client.get('statuses/user_timeline', params, (error, data, response) => {
 		if (error) {
          console.log(error);
-			res.send(error);
-		}
-		let id = data.statuses;
-		let tweets = [];
-		for(let i = 0; i < data.statuses.length; i++){
-      // Get the tweet Id from the returned data
-      let tweetObject = {
-      	user: id[i].user.name,
-      	text: id[i].text
+         res.send(error);
+         return;
       }
+      console.log(data);
+      res.send(data);
+	// 	let id = data.statuses;
+	// 	let tweets = [];
+	// 	for(let i = 0; i < data.statuses.length; i++){
+   //    // Get the tweet Id from the returned data
+   //    let tweetObject = {
+   //    	user: id[i].user.name,
+   //    	text: id[i].text
+   //    }
       
-      // Try to Favorite the selected Tweet
-     tweets.push(tweetObject);
-        }
+   //    // Try to Favorite the selected Tweet
+   //   tweets.push(tweetObject);
+   //      }
         
-    res.send(tweets);
+   //  res.send(tweets);
 
       });
 });
