@@ -18,6 +18,8 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
+import FormControl from "@material-ui/core/FormControl"
+import Input from "@material-ui/core/Input"
 import Button from "components/CustomButtons/Button.jsx";
 
 
@@ -48,7 +50,8 @@ import Search2 from "@material-ui/icons/Search";
 
 class Dashboard extends React.Component {
   state = {
-    value: 0
+    value: 0,
+    search: null
   };
   handleChange = (event, value) => {
     this.setState({ value });
@@ -57,6 +60,15 @@ class Dashboard extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+
+  handleClick = (e) => {
+    if (e.keyCode == 13 && e.shiftKey == false) {
+      e.preventDefault();
+      this.setState({search: e.target.value});
+    }
+  };
+
+
   render() {
     const { classes } = this.props;
     return (
@@ -66,22 +78,12 @@ class Dashboard extends React.Component {
         </div>
         <GridContainer>
           <GridItem xs={11}>
-            <TextField
-              formControlProps={{
-                className: classes.margin + " " + classes.search
-              }}
-              inputProps={{
-                placeholder: "Search",
-                inputProps: {
-                  "aria-label": "Search"
-                }
-              }}
-              fullWidth={true}
-            />
-
+            <FormControl fullWidth={true}>
+              <Input placeholder="Press Enter to submit your search" fullWidth={true} onKeyDown={this.handleClick}></Input>
+            </FormControl>
           </GridItem>
           <GridItem xs={1}>
-            <Button color="white" aria-label="edit" justIcon round>
+            <Button onClick={this.handleClick} color="white" aria-label="edit" justIcon round>
               <Search2 />
             </Button>
           </GridItem>
