@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
+import axios from "axios";
 // @material-ui/core
 import withStyles from "@material-ui/core/styles/withStyles";
 import Icon from "@material-ui/core/Icon";
@@ -51,7 +52,8 @@ import Search2 from "@material-ui/icons/Search";
 class Dashboard extends React.Component {
   state = {
     value: 0,
-    search: null
+    search: 'hello',
+    tweets: null
   };
   handleChange = (event, value) => {
     this.setState({ value });
@@ -65,6 +67,11 @@ class Dashboard extends React.Component {
     if (e.keyCode == 13 && e.shiftKey == false) {
       e.preventDefault();
       this.setState({search: e.target.value});
+      axios.get('http://localhost:8080/tweets/', {params: {search: "" + this.state.search}})
+        .then(response => {
+          this.setState({tweets: response});
+        })
+        .catch(error => {this.setState({tweets: error})});
     }
   };
 
@@ -88,6 +95,9 @@ class Dashboard extends React.Component {
             </Button>
           </GridItem>
         </GridContainer>
+        <div>
+          <p>{JSON.stringify(this.state.tweets)}</p>
+        </div>
         <GridContainer>
           <GridItem xs={12} sm={6} md={3}>
             <Card>

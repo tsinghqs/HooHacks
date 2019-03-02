@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const twitter = require('twitter'); 
 const cors = require('cors');
 
-const config = require('./config') 
+const config = require('./config.json') 
 const client = new twitter(config); 
 const http = require('http')
 const port = 5004;
@@ -11,13 +11,16 @@ const port = 5004;
 var app = express();
 app.use(cors());
 
-  const params = {
-     q: 'apple', count: 1
-   } 
+//   const params = {
+//      q: 'apple', count: 1
+//    } 
 
 app.get('/tweets', (req, res) => {
-	client.get('search/tweets', params, (error, data, response) => {
+   let params = {screen_name: req.query.search};
+   console.log("" + req.query.search);
+	client.get('statuses/user_timeline', params, (error, data, response) => {
 		if (error) {
+         console.log(error);
 			res.send(error);
 		}
 		let id = data.statuses;
@@ -50,4 +53,4 @@ app.get('/tweets', (req, res) => {
 // }
 
 
-app.listen(3000);
+app.listen(8080);
