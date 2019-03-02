@@ -11,8 +11,18 @@ def language_analysis(text):
     #print(sentiment)
     return sent_analysis
 
-example_text = "I am depressed"
+example_text = "Suicide is an unfortunate thing"
+ex = "" 
 
+example_text1 = example_text.split(" ")
+sent = 0
+average = 0
+for i in example_text1:
+    sent = language_analysis(i)
+    if sent.score < 0.5:
+        ex += i + " "
+print(ex)
+senti = language_analysis(ex.lower())
 sentiment = language_analysis(example_text)
-print(sentiment.score, sentiment.magnitude)
-
+print(sentiment.score)
+print(senti.score)
