@@ -1,6 +1,7 @@
 from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
+import sys 
 
 def language_analysis(text):
     client = language.LanguageServiceClient()
@@ -14,6 +15,7 @@ def language_analysis(text):
 example_text = "Suicide is an unfortunate thing"
 ex = "" 
 
+print(sys)
 example_text1 = example_text.split(" ")
 sent = 0
 average = 0
