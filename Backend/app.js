@@ -26,8 +26,7 @@ app.get('/tweets', (req, res) => {
       }
       console.log(data);
       // res.send(data);
-      const pythonProcess = spawn('python', ["./natLang.py", data]);
-
+     
       
 
 	// 	let id = data.statuses;
@@ -42,9 +41,12 @@ app.get('/tweets', (req, res) => {
       let tweets = [];
       for (let i = 0; i < data.length; i++) {
          let tweetObj = {
+         	
             user: data[i].user.name,
             screenName: data[i].user.screen_name,
             text: data[i].text
+             const pythonProcess = spawn('python', ["./natLang.py", data[i].user.name, data[i].text]);
+
          };
          tweets.push(tweetObj);
       }
