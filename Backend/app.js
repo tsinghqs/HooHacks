@@ -2,7 +2,6 @@ var express = require('express');
 const bodyParser = require('body-parser')
 const twitter = require('twitter'); 
 const cors = require('cors');
-const spawn = require("child_process").spawn;
 const config = require('./config.json') 
 const client = new twitter(config); 
 const http = require('http')
@@ -16,6 +15,7 @@ app.use(cors());
 //    } 
 
 app.get('/tweets', (req, res) => {
+   const spawn = require("child_process").spawn;
    let params = {screen_name: req.query.search};
    console.log("" + req.query.search);
 	client.get('statuses/user_timeline', params, (error, data, response) => {
@@ -26,7 +26,7 @@ app.get('/tweets', (req, res) => {
       }
       console.log(data);
       res.send(data);
-      const pythonProcess = spawn('python', data);
+      const pythonProcess = spawn('python', ["./natLang.py", data]);
 
       
 
