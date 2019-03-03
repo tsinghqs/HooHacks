@@ -81,7 +81,13 @@ class Dashboard extends React.Component {
     let card1;
     let card2;
     let cFlow;
-    let string = JSON.stringify(this.state.tweets);
+    let string;
+    if (this.state.tweets === null) {
+      string = JSON.stringify(this.state.tweets);
+    }
+    else {
+      string = JSON.stringify(this.state.tweets);
+    }
 
     if (this.state.tweets != null) {
         cFlow =  <CoverFlow width="960" height="500"

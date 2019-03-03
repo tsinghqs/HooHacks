@@ -25,7 +25,7 @@ app.get('/tweets', (req, res) => {
          return;
       }
       console.log(data);
-      res.send(data);
+      // res.send(data);
       const pythonProcess = spawn('python', ["./natLang.py", data]);
 
       
@@ -48,7 +48,6 @@ app.get('/tweets', (req, res) => {
          };
          tweets.push(tweetObj);
       }
-      console.log(tweets);
       res.send(tweets);
    });
 });
