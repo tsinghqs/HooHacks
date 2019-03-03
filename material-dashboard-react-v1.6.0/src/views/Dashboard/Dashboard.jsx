@@ -22,7 +22,7 @@ import Cloud from "@material-ui/icons/Cloud";
 import FormControl from "@material-ui/core/FormControl"
 import Input from "@material-ui/core/Input"
 import Button from "components/CustomButtons/Button.jsx";
-
+import CoverFlow from 'react-coverflow';
 
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
@@ -78,6 +78,23 @@ class Dashboard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    let card1;
+    let card2;
+    let cFlow;
+    let string = JSON.stringify(this.state.tweets);
+
+    if (this.state.tweets != null) {
+        cFlow =  <CoverFlow width="960" height="500"
+                            displayQuantityOfSide={2}
+                            navigation={false}
+                            enableScroll={true}
+                            clickable={true}
+                            active={0}
+        >
+          <Card>{string}</Card>
+          <Card>{string}</Card>
+        </CoverFlow>
+    }
     return (
       <div>
         <div>
@@ -95,9 +112,7 @@ class Dashboard extends React.Component {
             </Button>
           </GridItem>
         </GridContainer>
-        <div>
-          <p>{JSON.stringify(this.state.tweets)}</p>
-        </div>
+        <div>{cFlow}</div>
         <GridContainer>
           <GridItem xs={12} sm={6} md={3}>
             <Card>

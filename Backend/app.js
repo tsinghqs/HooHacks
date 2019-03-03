@@ -24,24 +24,19 @@ app.get('/tweets', (req, res) => {
          res.send(error);
          return;
       }
-      console.log(data);
-      res.send(data);
-	// 	let id = data.statuses;
-	// 	let tweets = [];
-	// 	for(let i = 0; i < data.statuses.length; i++){
-   //    // Get the tweet Id from the returned data
-   //    let tweetObject = {
-   //    	user: id[i].user.name,
-   //    	text: id[i].text
-   //    }
       
-   //    // Try to Favorite the selected Tweet
-   //   tweets.push(tweetObject);
-   //      }
-        
-   //  res.send(tweets);
-
-      });
+      let tweets = [];
+      for (let i = 0; i < data.length; i++) {
+         let tweetObj = {
+            user: data[i].user.name,
+            screenName: data[i].user.screen_name,
+            text: data[i].text
+         };
+         tweets.push(tweetObj);
+      }
+      console.log(tweets);
+      res.send(tweets);
+   });
 });
 
  // client.get('search/tweets', params, function(error, tweets, response) {
