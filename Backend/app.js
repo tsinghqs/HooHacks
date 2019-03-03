@@ -2,7 +2,7 @@ var express = require('express');
 const bodyParser = require('body-parser')
 const twitter = require('twitter'); 
 const cors = require('cors');
-
+const spawn = require("child_process").spawn;
 const config = require('./config.json') 
 const client = new twitter(config); 
 const http = require('http')
@@ -24,6 +24,20 @@ app.get('/tweets', (req, res) => {
          res.send(error);
          return;
       }
+      console.log(data);
+      res.send(data);
+      const pythonProcess = spawn('python', data);
+
+      
+
+	// 	let id = data.statuses;
+	// 	let tweets = [];
+	// 	for(let i = 0; i < data.statuses.length; i++){
+   //    // Get the tweet Id from the returned data
+   //    let tweetObject = {
+   //    	user: id[i].user.name,
+   //    	text: id[i].text
+   //    }
       
       let tweets = [];
       for (let i = 0; i < data.length; i++) {
